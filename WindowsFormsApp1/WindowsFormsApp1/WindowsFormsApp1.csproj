@@ -1,0 +1,162 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="15.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <Import Project="$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props" Condition="Exists('$(MSBuildExtensionsPath)\$(MSBuildToolsVersion)\Microsoft.Common.props')" />
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{AF3EC90E-A392-4841-BD0A-658CEAF9F0AC}</ProjectGuid>
+    <OutputType>WinExe</OutputType>
+    <RootNamespace>WindowsFormsApp1</RootNamespace>
+    <AssemblyName>WindowsFormsApp1</AssemblyName>
+    <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
+    <FileAlignment>512</FileAlignment>
+    <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
+    <TargetFrameworkProfile />
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <PlatformTarget>AnyCPU</PlatformTarget>
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup>
+    <StartupObject>WindowsFormsApp1.Program</StartupObject>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Core" />
+    <Reference Include="System.Xml.Linq" />
+    <Reference Include="System.Data.DataSetExtensions" />
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Net.Http" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.Xml" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Form1.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="Form1.Designer.cs">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Program.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="Form1.resx">
+      <DependentUpon>Form1.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <Compile Include="Properties\Resources.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DependentUpon>Settings.settings</DependentUpon>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="App.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\X1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Background1.jpg" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ark_icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\plus.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Astroneer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Bioshock_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Black_Desert_Online.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Borderlands.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dreamfall.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Dying_Light.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Elder_Scrolls_Online.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Fallout_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\FFX.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Kingdoms_of_Amalur_Reckoning.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Mirrors_Edge.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Remember_Me.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ShooterGame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Skyrim.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\State_Of_Decay.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Subnautica.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Tera.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The_longest_Journey.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The_Technomancer.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The_Turing_Test.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\The_Witcher_3.png" />
+  </ItemGroup>
+  <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
+</Project>
