@@ -59,7 +59,7 @@
             this.addbutton.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.addbutton.FlatAppearance.BorderSize = 0;
             this.addbutton.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.addbutton.Location = new System.Drawing.Point(100, 87);
+            this.addbutton.Location = new System.Drawing.Point(100, 85);
             this.addbutton.Name = "addbutton";
             this.addbutton.Size = new System.Drawing.Size(45, 45);
             this.addbutton.TabIndex = 3;
@@ -83,9 +83,9 @@
             this.nogames.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
             this.nogames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
             this.nogames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nogames.Location = new System.Drawing.Point(86, 66);
+            this.nogames.Location = new System.Drawing.Point(85, 65);
             this.nogames.Name = "nogames";
-            this.nogames.Size = new System.Drawing.Size(1414, 834);
+            this.nogames.Size = new System.Drawing.Size(1415, 835);
             this.nogames.TabIndex = 5;
             this.nogames.Text = "There are currently no Games ready to launch. Click to add a Game";
             this.nogames.UseVisualStyleBackColor = false;
