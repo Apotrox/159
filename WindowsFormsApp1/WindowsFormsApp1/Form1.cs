@@ -33,7 +33,7 @@ namespace WindowsFormsApp1
             InitializeComponent();
 
        //if there arent any games in the database, show the button for that
-            /* if (games.Components.Count == 0)
+             if (games==null)
              {
                  nogames.Visible = true;
                  nogames.Enabled = true;
@@ -43,7 +43,7 @@ namespace WindowsFormsApp1
                  nogames.Visible = false;
                  nogames.Enabled = false;
              }
-         */
+         
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -101,6 +101,7 @@ namespace WindowsFormsApp1
             //after this point, its pretty safe that everthing is loaded properly, so draw the buttons 
             //the buttons just have to start the startExecuteable Method for the Games-object
 
+            this.drawButtons();
         }
 
         private void drawButtons()
@@ -152,12 +153,28 @@ namespace WindowsFormsApp1
             searchGame();
         }
 
+        private void writeListToFile(List<Games> stuffs, string db_path)
+        {
+            string full_file_text = "";
+            foreach (Games stuff in stuffs)
+            {
+                string filestring =
+                    "name:{0}" + Environment.NewLine +
+                    "img:{1}" + Environment.NewLine +
+                    "path:{2}" + Environment.NewLine +
+                    Environment.NewLine;
+                filestring = string.Format(filestring, stuff.name, stuff.img_path, stuff.path);
+                full_file_text += filestring;
+            }
+            File.WriteAllText(this.db_path, full_file_text);
+        }
 
-       //Search a Game
+        //Search a Game
 
         public void searchGame()
         {
             StartPosition:
+
        //select a game exe
             OpenFileDialog select = new OpenFileDialog()
             {
@@ -171,7 +188,8 @@ namespace WindowsFormsApp1
             if (result == DialogResult.OK)
             {
        //save game exe path for later use
-                this.FilePath = select.FileName; 
+                this.FilePath = select.FileName;
+                this.FileName = Path.GetFileName(FilePath);
 
        //directory for the icon copies
                 string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CubricLauncher\icons\";
@@ -239,13 +257,54 @@ namespace WindowsFormsApp1
                 }
             }
 
-            //add the game
-
+       //add the game
+            if(this.add_img_path!="" && this.FilePath!="" && this.FileName!="")
+            {
+       //writes everything to the list and in the databse
+                this.games.Add(new Games(this.FilePath, this.FileName,this.add_img_path));
+                this.writeListToFile(this.games, this.db_path);
+       //reset everything
+                this.add_img_path = "";
+                this.add_img = null;
+                this.FileName = "";
+                this.FilePath = "";
+       //draw the buttons
+                drawButtons();
+            }
         }
     }
 
     class Games
     {
+        public string path;
+        public string name;
+        public Image img;
+        public string img_path;
 
+        public Games()
+        {
+
+        }
+        public Games(string path, string name, string imgPath)
+        {
+            this.path = path;
+            this.name = name;
+            this.img_path = imgPath;
+            this.img = Image.FromFile(imgPath);
+        }
+
+        public void startExecutable(object sender, EventArgs e)
+        {
+            try
+            {
+                Process.Start(this.path);
+            }
+            catch(Exception ex)
+            {
+                
+                MessageBox.Show("An error occured!" + "\n\n" + ex,"Error!");
+            }
+
+        }
     }
 }
