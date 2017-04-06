@@ -63,7 +63,7 @@ namespace WindowsFormsApp1
        //empty list slot
             Games tmp_stuff = new Games();
 
-            //tests if there is anything in the database
+       //tests if there is anything in the database
             foreach (string line in file_contents)
             {
        //if it comes to the end of the database (its empty)
@@ -157,7 +157,7 @@ namespace WindowsFormsApp1
 
         public void searchGame()
         {
-
+            StartPosition:
        //select a game exe
             OpenFileDialog select = new OpenFileDialog()
             {
@@ -205,16 +205,42 @@ namespace WindowsFormsApp1
        //pukes out exception if copying failed
                     catch (Exception ex)
                     {
-                        MessageBox.Show("Unable to copy Icon: " + "\n" + ex);
+                        MessageBox.Show("Unable to copy Icon: " + "\n" + ex, "Warning!");
                     }
 
-       //save Image file and path for later use
-                   this.add_img = Image.FromFile(targetPath);
-                   this.add_img_path = img.FileName;
+       //confirmation
+                    DialogResult msgbox;
+                    msgbox = MessageBox.Show("Is everything correct?: " + "\n" + "Game.exe: " + select.FileName +
+                                             "\n" + "Game icon: " + Path.GetFileName(img.FileName), "Confirmation", MessageBoxButtons.YesNo);
 
-                
+                    if (msgbox == DialogResult.Yes)
+                    {
+       //save Image file and path for later use
+                        this.add_img = Image.FromFile(targetPath);
+                        this.add_img_path = img.FileName;
+                    }
+                    else
+                    {
+       //confirmation if the image has to be deleted or not
+                        msgbox = MessageBox.Show("Please add the game again with correct data." +
+                                                 " Nevertheless, the image got copied. Do you want to delete it?", "Warning", MessageBoxButtons.YesNo);
+
+                        if (msgbox == DialogResult.Yes)
+                        {
+                            File.Delete(targetPath);
+                        }
+                        else
+                        {
+                            msgbox = MessageBox.Show("Alright. Then do as you behave.", "Confirmation");
+                            
+                        }
+                        goto StartPosition;
+                    }
                 }
             }
+
+            //add the game
+
         }
     }
 
