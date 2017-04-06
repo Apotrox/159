@@ -90,73 +90,7 @@
     <None Include="Resources\Background1.jpg" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Resources\ark_icon.png" />
-  </ItemGroup>
-  <ItemGroup>
     <None Include="Resources\plus.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Astroneer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Bioshock_1.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Black_Desert_Online.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Borderlands.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Dreamfall.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Dying_Light.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Elder_Scrolls_Online.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Fallout_4.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\FFX.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Kingdoms_of_Amalur_Reckoning.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Mirrors_Edge.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Remember_Me.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\ShooterGame.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Skyrim.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\State_Of_Decay.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Subnautica.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\Tera.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\The_longest_Journey.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\The_Technomancer.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\The_Turing_Test.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="Resources\The_Witcher_3.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

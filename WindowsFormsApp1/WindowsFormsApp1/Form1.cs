@@ -16,15 +16,18 @@ namespace WindowsFormsApp1
 {
     public partial class Form1 : Form
     {
-        public  String FileName { get; set; }
-        public  String FilePath { get; set; }
-        public  Image add_img { get; set; }
+        private string db_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"CurbicLauncher\db.txt";
+        public string FileName = "";
+        public string FilePath = "";
+        public Image add_img = null;
+        public string add_img_path = "";
         
 
         public Form1()
         {
-            
             InitializeComponent();
+
+            //if there arent any games in the database, show the button for that
             /* if (games.Components.Count == 0)
              {
                  nogames.Visible = true;
@@ -40,22 +43,15 @@ namespace WindowsFormsApp1
 
         private void Form1_Load(object sender, EventArgs e)
         {
-
-            MyItem itm = new MyItem();
-
-            int x = addbutton.Location.X + 60;
-            int y = addbutton.Location.Y + 95;
-
-        /*    foreach ()
+       //if the database doesnt exist, create it
+            if (!File.Exists(this.db_path))
             {
-                Button btn = new Button();
-
-                btn.Location = new Point(x + 250, y);
-                btn.Name = "";
-                btn.Text = "";
-
+                FileStream fh = File.Create(this.db_path);
+                fh.Close();
             }
-        */
+
+       //Copies content of the database into an array
+            string[] file_contents = File.ReadAllLines(this.db_path);
         }
 
         private void button1_Click_1(object sender, EventArgs e)
@@ -75,10 +71,12 @@ namespace WindowsFormsApp1
         }
 
 
-        //Search a Game
+       //Search a Game
 
         public void searchGame()
         {
+
+       //select a game exe
             OpenFileDialog select = new OpenFileDialog()
             {
                 Filter = "exe files (*.exe)|*.exe",
@@ -87,11 +85,16 @@ namespace WindowsFormsApp1
             };
             DialogResult result = select.ShowDialog();
 
+
             if (result == DialogResult.OK)
             {
-                FilePath = select.FileName; 
+       //save game exe path for later use
+                this.FilePath = select.FileName; 
+
+       //directory for the icon copies
                 string appdata = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CubricLauncher\icons\";
 
+       //select a game icon
                 OpenFileDialog img = new OpenFileDialog()
                 {
                     Filter = "png files (*.png)|*.png",
@@ -101,34 +104,35 @@ namespace WindowsFormsApp1
                 DialogResult res = img.ShowDialog();
                 if (res == DialogResult.OK)
                 {
-                    //Copy image to Appdata
+       //Copy image to Appdata
                     string targetPath = @Path.Combine(appdata, Path.GetFileName(img.FileName));
                     string sourcePath = @img.FileName;
 
                     try
                     {
-
-                        if (!System.IO.Directory.Exists(targetPath))
+       //if directory for the copies does not exists, create it
+                        if (!System.IO.Directory.Exists(appdata))
                         {
-                            System.IO.Directory.CreateDirectory(targetPath);
+                            System.IO.Directory.CreateDirectory(appdata);
                         }
 
+       //copy image
                         System.IO.File.Copy(sourcePath, targetPath, true);
                     }
 
+       //pukes out exception if copying failed
                     catch (Exception ex)
                     {
                         MessageBox.Show("Unable to copy Icon: " + "\n" + ex);
                     }
 
-                   // add_img = Image.FromFile(targetPath);
+       //save Image file and path for later use
+                   this.add_img = Image.FromFile(targetPath);
+                   this.add_img_path = img.FileName;
+
+                
                 }
             }
         }
-    }
-
-    class MyItem : Form1
-    {
-
     }
 }
