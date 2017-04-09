@@ -57,8 +57,9 @@ namespace WindowsFormsApp1
        //if it comes to the end of the database (its empty)
                 if (line.Trim().Length == 0)
                 {
-                    //insert stuff
+       //insert stuff
                     this.games.Add(tmp_stuff);
+                    tmp_stuff = new Game();
                     continue;
                 }
                 
@@ -145,10 +146,11 @@ namespace WindowsFormsApp1
                 gamecount++;
                 x = x + 250;
                 btn.Click += new EventHandler(stuff.startExecutable);
+                btn.MouseClick += new MouseEventHandler(stuff.mouseclick);
                 this.game_btns.Add(btn);
                 this.Controls.Add(btn);
        //if the gamecount in one row exceeds 5, it will start a new row
-                if (gamecount > 5)
+                if (gamecount == 5)
                 {
                     x = 150;
                     y += 250;
@@ -324,6 +326,30 @@ namespace WindowsFormsApp1
 
                     MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
                 }
+        }
+        public void mouseclick(object sender, MouseEventArgs e)
+        {
+            ContextMenu con = new ContextMenu();
+            MenuItem del = new MenuItem("Delete");
+            MenuItem dei = new MenuItem("Deinstall");
+            MenuItem exi = new MenuItem("Exit");
+            
+            switch (e.Button)
+            {
+
+                case MouseButtons.Left:
+                    // Left click
+                    break;
+
+                case MouseButtons.Right:
+                    if (e.Location == new Point())
+                    { 
+                    con.MenuItems.Add(del);
+                    con.MenuItems.Add(dei);
+                    }
+                    break;
+    
+            }
         }
     }
 }
