@@ -90,5 +90,11 @@
   <ItemGroup>
     <None Include="Resources\plus.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\Taskbar icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\NoGame.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

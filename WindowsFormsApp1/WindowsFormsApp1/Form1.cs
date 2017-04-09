@@ -17,33 +17,20 @@ namespace WindowsFormsApp1
     public partial class Form1 : Form
     {
         //variables necessary for the game.exe and its icon
-        private string db_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"CurbicLauncher\db.txt";
+        private string db_path = Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CubricLauncher\db.txt";
         private string FileName = "";
         private string FilePath = "";
         private Image add_img = null;
         private string add_img_path = "";
 
         //list that contains every entered game
-        private List<Games> games;
+        private List<Game> games;
         //list that contains every created game button
         private List<Button> game_btns = new List<Button>();
 
         public Form1()
         {
             InitializeComponent();
-
-       //if there arent any games in the database, show the button for that
-             if (games==null)
-             {
-                 nogames.Visible = true;
-                 nogames.Enabled = true;
-             }
-             else
-             {
-                 nogames.Visible = false;
-                 nogames.Enabled = false;
-             }
-         
         }
 
         private void Form1_Load(object sender, EventArgs e)
@@ -51,7 +38,8 @@ namespace WindowsFormsApp1
        //if the database doesnt exist, create it
             if (!File.Exists(this.db_path))
             {
-                FileStream fh = File.Create(this.db_path);
+                Directory.CreateDirectory(Environment.GetFolderPath(Environment.SpecialFolder.ApplicationData) + @"\CubricLauncher\");
+                FileStream fh = File.Create(db_path);
                 fh.Close();
             }
 
@@ -59,9 +47,9 @@ namespace WindowsFormsApp1
             string[] file_contents = File.ReadAllLines(this.db_path);
 
        //Create game list
-            this.games = new List<Games>();
+            this.games = new List<Game>();
        //empty list slot
-            Games tmp_stuff = new Games();
+            Game tmp_stuff = new Game();
 
        //tests if there is anything in the database
             foreach (string line in file_contents)
@@ -91,8 +79,8 @@ namespace WindowsFormsApp1
                         }
                         catch
                         {
-       //load default picture
-                            
+                            //load default picture
+                            tmp_stuff.img = Properties.Resources.NoGame;
                         }
                         continue;
                 }
@@ -103,6 +91,33 @@ namespace WindowsFormsApp1
 
             this.drawButtons();
         }
+
+        //enabling to move the window
+        private bool mouseDown;
+        private Point lastLocation;
+
+        private void Form1_MouseDown(object sender, MouseEventArgs e)
+        {
+            mouseDown = true;
+            lastLocation = e.Location;
+        }
+
+        private void Form1_MouseMove(object sender, MouseEventArgs e)
+        {
+            if (mouseDown)
+            {
+                this.Location = new Point(
+                    (this.Location.X - lastLocation.X) + e.X, (this.Location.Y - lastLocation.Y) + e.Y);
+
+                this.Update();
+            }
+        }
+
+        private void Form1_MouseUp(object sender, MouseEventArgs e)
+        {
+            mouseDown = false;
+        }
+
 
         private void drawButtons()
         {
@@ -115,10 +130,15 @@ namespace WindowsFormsApp1
             int y = 170;
             int x = 150;
             int gamecount = 0;
-            foreach (Games stuff in this.games)
+            foreach (Game stuff in this.games)
             {
                 Button btn = new Button();
+                btn.FlatStyle = FlatStyle.Flat;
                 btn.BackgroundImage = stuff.img;
+                btn.BackgroundImageLayout = ImageLayout.Stretch;
+                btn.FlatAppearance.BorderSize = 0;
+                btn.BackColor = Color.Transparent;
+                btn.FlatAppearance.MouseOverBackColor = Color.Transparent;
                 btn.Text = "";
                 btn.Size = new System.Drawing.Size(200, 200);
                 btn.Location = new Point(x,y);
@@ -131,7 +151,7 @@ namespace WindowsFormsApp1
                 if (gamecount > 5)
                 {
                     x = 150;
-                    y = y + 250;
+                    y += 250;
                 }
 
             }
@@ -153,10 +173,10 @@ namespace WindowsFormsApp1
             searchGame();
         }
 
-        private void writeListToFile(List<Games> stuffs, string db_path)
+        private void writeListToFile(List<Game> stuffs, string db_path)
         {
             string full_file_text = "";
-            foreach (Games stuff in stuffs)
+            foreach (Game stuff in stuffs)
             {
                 string filestring =
                     "name:{0}" + Environment.NewLine +
@@ -261,7 +281,7 @@ namespace WindowsFormsApp1
             if(this.add_img_path!="" && this.FilePath!="" && this.FileName!="")
             {
        //writes everything to the list and in the databse
-                this.games.Add(new Games(this.FilePath, this.FileName,this.add_img_path));
+                this.games.Add(new Game(this.FilePath, this.FileName,this.add_img_path));
                 this.writeListToFile(this.games, this.db_path);
        //reset everything
                 this.add_img_path = "";
@@ -274,18 +294,18 @@ namespace WindowsFormsApp1
         }
     }
 
-    class Games
+    class Game
     {
         public string path;
         public string name;
         public Image img;
         public string img_path;
 
-        public Games()
+        public Game()
         {
 
         }
-        public Games(string path, string name, string imgPath)
+        public Game(string path, string name, string imgPath)
         {
             this.path = path;
             this.name = name;
@@ -295,16 +315,15 @@ namespace WindowsFormsApp1
 
         public void startExecutable(object sender, EventArgs e)
         {
-            try
-            {
-                Process.Start(this.path);
-            }
-            catch(Exception ex)
-            {
-                
-                MessageBox.Show("An error occured!" + "\n\n" + ex,"Error!");
-            }
+                try
+                {
+                    Process.Start(this.path);
+                }
+                catch (Exception ex)
+                {
 
+                    MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
+                }
         }
     }
 }

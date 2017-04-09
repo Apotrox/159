@@ -31,8 +31,6 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(Form1));
             this.button1 = new System.Windows.Forms.Button();
             this.addbutton = new System.Windows.Forms.Button();
-            this.textBox1 = new System.Windows.Forms.TextBox();
-            this.nogames = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // button1
@@ -66,32 +64,6 @@
             this.addbutton.UseVisualStyleBackColor = false;
             this.addbutton.Click += new System.EventHandler(this.addbutton_Click);
             // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(12, 12);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(150, 20);
-            this.textBox1.TabIndex = 4;
-            this.textBox1.Text = "Das ist nur TestAusgabe";
-            // 
-            // nogames
-            // 
-            this.nogames.BackColor = System.Drawing.Color.Transparent;
-            this.nogames.Enabled = false;
-            this.nogames.FlatAppearance.BorderSize = 0;
-            this.nogames.FlatAppearance.MouseDownBackColor = System.Drawing.Color.Transparent;
-            this.nogames.FlatAppearance.MouseOverBackColor = System.Drawing.Color.Transparent;
-            this.nogames.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.nogames.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.nogames.Location = new System.Drawing.Point(85, 65);
-            this.nogames.Name = "nogames";
-            this.nogames.Size = new System.Drawing.Size(1415, 835);
-            this.nogames.TabIndex = 5;
-            this.nogames.Text = "There are currently no Games ready to launch. Click to add a Game";
-            this.nogames.UseVisualStyleBackColor = false;
-            this.nogames.Visible = false;
-            this.nogames.Click += new System.EventHandler(this.nogames_Click);
-            // 
             // Form1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -100,8 +72,6 @@
             this.BackgroundImage = global::WindowsFormsApp1.Properties.Resources.Background1;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(1500, 900);
-            this.Controls.Add(this.nogames);
-            this.Controls.Add(this.textBox1);
             this.Controls.Add(this.addbutton);
             this.Controls.Add(this.button1);
             this.ForeColor = System.Drawing.Color.Transparent;
@@ -111,9 +81,12 @@
             this.MaximumSize = new System.Drawing.Size(1500, 900);
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
-            this.Text = "Cubris Launcher";
+            this.Text = "Cubric Launcher";
+            this.Load += new System.EventHandler(this.Form1_Load);
+            this.MouseDown += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseDown);
+            this.MouseMove += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseMove);
+            this.MouseUp += new System.Windows.Forms.MouseEventHandler(this.Form1_MouseUp);
             this.ResumeLayout(false);
-            this.PerformLayout();
 
         }
 
@@ -121,8 +94,6 @@
 
         private System.Windows.Forms.Button button1;
         private System.Windows.Forms.Button addbutton;
-        private System.Windows.Forms.TextBox textBox1;
-        private System.Windows.Forms.Button nogames;
     }
 }
 
