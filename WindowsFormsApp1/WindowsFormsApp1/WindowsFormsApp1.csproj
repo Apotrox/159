@@ -35,6 +35,9 @@
   <PropertyGroup>
     <StartupObject>WindowsFormsApp1.Program</StartupObject>
   </PropertyGroup>
+  <PropertyGroup>
+    <ApplicationIcon>Taskbar icon.ico</ApplicationIcon>
+  </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
     <Reference Include="System.Core" />
@@ -95,6 +98,10 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\NoGame.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\text.png" />
+    <Content Include="Taskbar icon.ico" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

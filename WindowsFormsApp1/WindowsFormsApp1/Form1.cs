@@ -145,8 +145,8 @@ namespace WindowsFormsApp1
                 btn.Location = new Point(x,y);
                 gamecount++;
                 x = x + 250;
-                btn.Click += new EventHandler(stuff.startExecutable);
-                btn.MouseClick += new MouseEventHandler(stuff.mouseclick);
+                btn.MouseClick += new MouseEventHandler(stuff.startExecutable);
+              //  btn.MouseClick += new MouseEventHandler(mouseclick);   <- soll halt das das event dazumachen, aber es wird halt nicht aufgerufen...
                 this.game_btns.Add(btn);
                 this.Controls.Add(btn);
        //if the gamecount in one row exceeds 5, it will start a new row
@@ -294,7 +294,45 @@ namespace WindowsFormsApp1
                 drawButtons();
             }
         }
+    /* das is das erste was mir halt so eingefallen ist und ich dann gemacht hab
+        //create right-click-menu
+        public void mouseclick(object sender, MouseEventArgs e)
+        {
+            ContextMenu con = new ContextMenu();
+            MenuItem del = new MenuItem("Delete", new EventHandler(clickDel));
+            MenuItem dei = new MenuItem("Deinstall", new EventHandler(clickDei));
+            Button btn = (Button)sender;
+            Point pt = new Point(btn.Location.X, btn.Location.Y);
+            switch (e.Button)
+            {
+                case MouseButtons.Right:
+                    {
+                        con.MenuItems.Add(del);
+                        con.MenuItems.Add(dei);
+                        con.Show(this,pt);
+                        break;
+                    }
+                case MouseButtons.Left:
+                    {
+                        stuff.startExecuteable(sender,e);
+                        break;
+                    }
+                
+            }
+        }
+        //eventhandler for delete
+        public void clickDel(object sender, EventArgs e)
+        {
+
+        }
+        //eventhandler for deinstall
+        public void clickDei(object sender, EventArgs e)
+        {
+
+        }
+    */
     }
+        
 
     class Game
     {
@@ -315,41 +353,48 @@ namespace WindowsFormsApp1
             this.img = Image.FromFile(imgPath);
         }
 
-        public void startExecutable(object sender, EventArgs e)
+        public void startExecutable(object sender, MouseEventArgs e)
         {
-                try
-                {
-                    Process.Start(this.path);
-                }
-                catch (Exception ex)
-                {
-
-                    MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
-                }
-        }
-        public void mouseclick(object sender, MouseEventArgs e)
-        {
+            //hier ist halt alles von oben noch drinne, aber es startet nur das spiel (case 2). hab das mit breakpoints ausprobiert aber case 1 is irgendwie nie der fall...
             ContextMenu con = new ContextMenu();
-            MenuItem del = new MenuItem("Delete");
-            MenuItem dei = new MenuItem("Deinstall");
-            MenuItem exi = new MenuItem("Exit");
-            
+            MenuItem del = new MenuItem("Delete", new EventHandler(clickDel));
+            MenuItem dei = new MenuItem("Deinstall", new EventHandler(clickDei));
+            Button btn = (Button)sender;
+            Point pt = new Point(btn.Location.X, btn.Location.Y);
             switch (e.Button)
             {
-
-                case MouseButtons.Left:
-                    // Left click
-                    break;
-
                 case MouseButtons.Right:
-                    if (e.Location == new Point())
-                    { 
-                    con.MenuItems.Add(del);
-                    con.MenuItems.Add(dei);
+                    {
+                        con.MenuItems.Add(del);
+                        con.MenuItems.Add(dei);
+                        con.Show(btn, pt);
+                        break;
+                    }
+                case MouseButtons.Left:
+                    {
+
+
+                    }
+                    try
+                    {
+                        Process.Start(this.path);
+                    }
+                    catch (Exception ex)
+                    {
+
+                        MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
                     }
                     break;
-    
             }
+        }
+        public void clickDel(object sender, EventArgs e)
+        {
+
+        }
+        //eventhandler for deinstall
+        public void clickDei(object sender, EventArgs e)
+        {
+
         }
     }
 }
