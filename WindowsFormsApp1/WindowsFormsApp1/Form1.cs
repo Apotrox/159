@@ -145,8 +145,7 @@ namespace WindowsFormsApp1
                 btn.Location = new Point(x,y);
                 gamecount++;
                 x = x + 250;
-                btn.MouseClick += new MouseEventHandler(stuff.startExecutable);
-              //  btn.MouseClick += new MouseEventHandler(mouseclick);   <- soll halt das das event dazumachen, aber es wird halt nicht aufgerufen...
+                btn.MouseDown += new MouseEventHandler(stuff.startExecutable);
                 this.game_btns.Add(btn);
                 this.Controls.Add(btn);
        //if the gamecount in one row exceeds 5, it will start a new row
@@ -166,7 +165,7 @@ namespace WindowsFormsApp1
 
 
         private void addbutton_Click(object sender, EventArgs e)
-        {
+        { 
             searchGame();
         }
 
@@ -294,43 +293,7 @@ namespace WindowsFormsApp1
                 drawButtons();
             }
         }
-    /* das is das erste was mir halt so eingefallen ist und ich dann gemacht hab
-        //create right-click-menu
-        public void mouseclick(object sender, MouseEventArgs e)
-        {
-            ContextMenu con = new ContextMenu();
-            MenuItem del = new MenuItem("Delete", new EventHandler(clickDel));
-            MenuItem dei = new MenuItem("Deinstall", new EventHandler(clickDei));
-            Button btn = (Button)sender;
-            Point pt = new Point(btn.Location.X, btn.Location.Y);
-            switch (e.Button)
-            {
-                case MouseButtons.Right:
-                    {
-                        con.MenuItems.Add(del);
-                        con.MenuItems.Add(dei);
-                        con.Show(this,pt);
-                        break;
-                    }
-                case MouseButtons.Left:
-                    {
-                        stuff.startExecuteable(sender,e);
-                        break;
-                    }
-                
-            }
-        }
-        //eventhandler for delete
-        public void clickDel(object sender, EventArgs e)
-        {
 
-        }
-        //eventhandler for deinstall
-        public void clickDei(object sender, EventArgs e)
-        {
-
-        }
-    */
     }
         
 
@@ -355,38 +318,30 @@ namespace WindowsFormsApp1
 
         public void startExecutable(object sender, MouseEventArgs e)
         {
-            //hier ist halt alles von oben noch drinne, aber es startet nur das spiel (case 2). hab das mit breakpoints ausprobiert aber case 1 is irgendwie nie der fall...
-            ContextMenu con = new ContextMenu();
-            MenuItem del = new MenuItem("Delete", new EventHandler(clickDel));
-            MenuItem dei = new MenuItem("Deinstall", new EventHandler(clickDei));
-            Button btn = (Button)sender;
-            Point pt = new Point(btn.Location.X, btn.Location.Y);
-            switch (e.Button)
+            if (e.Button == MouseButtons.Left)
+                {
+                try
+                {
+                    Process.Start(this.path);
+                }
+                catch (Exception ex)
+                {
+
+                    MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
+                }
+            }
+            else if(e.Button == MouseButtons.Right)
             {
-                case MouseButtons.Right:
-                    {
-                        con.MenuItems.Add(del);
-                        con.MenuItems.Add(dei);
-                        con.Show(btn, pt);
-                        break;
-                    }
-                case MouseButtons.Left:
-                    {
-
-
-                    }
-                    try
-                    {
-                        Process.Start(this.path);
-                    }
-                    catch (Exception ex)
-                    {
-
-                        MessageBox.Show("An error occured!" + "\n\n" + ex, "Error!");
-                    }
-                    break;
+                ContextMenu con = new ContextMenu();
+                Button btn = (Button)sender;
+                Point pt = new Point(btn.Location.X, btn.Location.Y);
+                    con.MenuItems.Add("Delete", new EventHandler(clickDel));
+                    con.MenuItems.Add("Deinstall", new EventHandler(clickDei));
+                    btn.ContextMenu = con;
+                    con.Show(btn,pt);
             }
         }
+        //eventhandler for delete
         public void clickDel(object sender, EventArgs e)
         {
 
